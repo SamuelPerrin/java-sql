@@ -165,7 +165,11 @@ ORDER BY c.company_name
   </details>
 
 ```SQL
-
+SELECT c.contact_name, COUNT(o.order_id) num_orders
+FROM orders o JOIN customers c
+ON o.customer_id = c.customer_id
+GROUP BY c.contact_name
+ORDER BY num_orders DESC
 ```
 
 * [ ] ***list orders grouped by customer's city showing the number of orders per city. Returns 69 Records with _Aachen_ showing 6 orders and _Albuquerque_ showing 18 orders***
@@ -176,7 +180,11 @@ ORDER BY c.company_name
   </details>
 
 ```SQL
-
+SELECT c.city, COUNT(o.order_id) num_orders
+FROM orders o JOIN customers c
+ON o.customer_id = c.customer_id
+GROUP BY c.city
+ORDER BY num_orders DESC;
 ```
 
 ## Data Normalization
@@ -196,31 +204,28 @@ Below are some empty tables to be used to normalize the database
 * Not all of the cells will contain data in the final solution
 * Feel free to edit these tables as necessary
 
-Table Name:
+Table Name: people
 
-|            |            |            |            |            |            |            |            |            |
-|------------|------------|------------|------------|------------|------------|------------|------------|------------|
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
+|  person_id |   name     | fenced_yard | city_dweller |
+|------------|------------|-------------|--------------|
+|     1      |   Jane     | No          | Yes          |
+|     2      |   Bob      | No          | No           |
+|     3      |   Sam      | Yes         | No           |
 
-Table Name:
 
-|            |            |            |            |            |            |            |            |            |
-|------------|------------|------------|------------|------------|------------|------------|------------|------------|
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
-|            |            |            |            |            |            |            |            |            |
+Table Name: pets
 
-Table Name:
+|   pet_id   |   name     |   type     |  person_id |
+|------------|------------|------------|------------|
+|     1      | Ellie      |   Dog      |    1       |
+|     2      | Tiger      |   Cat      |    1       |
+|     3      | Toby       |   Turtle   |    1       |
+|     4      | Joe        |   Horse    |    2       |
+|     5      | Ginger     |   Dog      |    3       |
+|     6      | Miss Kitty |   Cat      |    3       |
+|     7      | Bubble     |   Fish     |    3       |
+
+Table Name: 
 
 |            |            |            |            |            |            |            |            |            |
 |------------|------------|------------|------------|------------|------------|------------|------------|------------|
